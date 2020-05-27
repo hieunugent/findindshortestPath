@@ -1,9 +1,8 @@
 # state problem and process the problem
-- 
-
-
-
-
+- todo list 
+    - make grid
+    - make start point and end destinate
+    
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

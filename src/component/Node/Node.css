@@ -3,6 +3,14 @@
     height: 25px;
     outline: 1px solid rgb(3, 6, 26);
     display: inline-block;
+    resize: both;
+    
+}
+.node-start{
+    background-color: blue;
+}
+.node-finish{
+    background-color: crimson;
 }
 .node-wall{
     background-color: rgb(12, 53, 71)

@@ -2,10 +2,19 @@ import React from "react";
 import "./Node.css";
 
 
-function Node(){
+function Node(node){
+    const{row, col, isStart, isFinish, isWall} = node;
+    const extraClassName =  isStart? 'node node-start': isFinish? 'node node-finish' : isWall? 'node node-wall':'node';
+    function handleMouse(){
+        node.onMouseDown(row, col);
+    }
+
     return (
-        <div  className={'node'}>
-            
+        <div 
+         id={'node'}
+         className={extraClassName}
+         onMouseDown={handleMouse}
+         >
         </div>
     );
 }
