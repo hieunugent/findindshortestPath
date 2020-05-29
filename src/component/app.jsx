@@ -29,20 +29,10 @@ const createNode= (row, col) => {
     };
 };
 
-const getUpdateGrid = (grid, row, col) =>{
-    const newGrid = grid.slice();
-    const node = newGrid[row][col];
-    const newNode = {
-        ...node, 
-        isWall : !node.isWall,
-    };
-    newGrid[row][col]= newNode;
-    return newGrid;
-}
-function App(){
+
+function App(props){
    
    const grid = getInitialGrid();
-  
    function handleMouseDown(node){
         const asNode = grid[node.row][node.col];
         const newNode = {
@@ -51,9 +41,9 @@ function App(){
         }
         grid[node.row][node.col]= newNode;   
         console.log( newNode);
-          return grid;
-}
-   return (<div className="grid">
+       // props.onUpdateGrid(newNode)
+   }
+   return (<div className="grid"  >
              {grid.map((row, rowIdx)=> {
                  return (
                     <div key={rowIdx}>
