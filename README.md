@@ -2,8 +2,10 @@
 - todo list 
     - make grid
     - make start point and end destinate
-    
+    - make the isWall respond on backend properly , when click on any node of grid it return the right behavior , but not display in the frontend yet (may 28)
+    - 
 
+  
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

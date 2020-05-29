@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import Node from "./Node/Node";
 import "./grid/grid.css";
 
@@ -25,38 +25,33 @@ const createNode= (row, col) => {
         row,
         isStart: row===START_NODE_ROW && col===START_NODE_COL,
         isFinish: row===FINISH_NODE_ROW && col===FINISH_NODE_COL,
-        isWall:false,
+        isWall:  row===10 && col===20,
     };
 };
 
-const UpdateWallNode=(grid, row, col) => { 
+const getUpdateGrid = (grid, row, col) =>{
     const newGrid = grid.slice();
     const node = newGrid[row][col];
-    const updateNode={
+    const newNode = {
         ...node, 
-        isWall: !node.isWall,
+        isWall : !node.isWall,
     };
-    newGrid[row][col] = updateNode;
-
-};
-
+    newGrid[row][col]= newNode;
+    return newGrid;
+}
 function App(){
    
    const grid = getInitialGrid();
-   
- 
-
-   function handleMouseDown(row, col){
-   const newGrid = grid.slice();
-    const node = newGrid[row][col];
-    const updateNode={
-        ...node, 
-        isWall: !node.isWall,
-    };
-    newGrid[row][col] = updateNode;
-
-    
-
+  
+   function handleMouseDown(node){
+        const asNode = grid[node.row][node.col];
+        const newNode = {
+            ...asNode, 
+            isWall : !asNode.isWall,
+        }
+        grid[node.row][node.col]= newNode;   
+        console.log( newNode);
+          return grid;
 }
    return (<div className="grid">
              {grid.map((row, rowIdx)=> {
@@ -72,6 +67,7 @@ function App(){
                                     isWall={isWall}
                                     row={row}
                                     col={col}
+                                    // mouseIsPressed={mouseIsPressed}
                                     onMouseDown={handleMouseDown}
                                 > </Node>
                             );
