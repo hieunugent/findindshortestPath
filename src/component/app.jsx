@@ -25,30 +25,56 @@ const createNode= (row, col) => {
         row,
         isStart: row===START_NODE_ROW && col===START_NODE_COL,
         isFinish: row===FINISH_NODE_ROW && col===FINISH_NODE_COL,
-        isWall:  row===10 && col===20,
+        isWall:  false,
     };
 };
 
+const createWall=(grid, row, col)=> {
+    const asNode = grid[row][col];
+    const newNode = {
+      ...asNode,
+      isWall: !asNode.isWall,
+    };  
+    return newNode;
+}
+ 
 
-function App(props){
+function App(){
    
    const grid = getInitialGrid();
+   const [mouseIsPressed, setmousePress] = useState(false);
+   
    function handleMouseDown(node){
-        const asNode = grid[node.row][node.col];
-        const newNode = {
-            ...asNode, 
-            isWall : !asNode.isWall,
+        grid[node.row][node.col] = createWall(grid, node.row, node.col);     
+        setmousePress(true);  
+   }
+   function handleMouseup(){
+       setmousePress(false);
+       console.log(mouseIsPressed);
+       
+   }
+   function handleMouseEnter(node){
+       console.log(mouseIsPressed);
+       
+        if (!mouseIsPressed){
+            return;
         }
-        grid[node.row][node.col]= newNode;   
-        console.log( newNode);
-       // props.onUpdateGrid(newNode)
+            grid[node.row][node.col]= createWall(grid, node.row, node.col);
+
    }
    return (<div className="grid"  >
              {grid.map((row, rowIdx)=> {
                  return (
                     <div key={rowIdx}>
                         {row.map((node, nodeIdx)=> {
-                            const {row,col, isFinish, isStart, isWall} = node;
+                            const {
+                              row,
+                              col,
+                              isFinish,
+                              isStart,
+                              isWall,
+                              
+                            } = node;
                             return (
                                 <Node
                                     key={nodeIdx}
@@ -57,8 +83,11 @@ function App(props){
                                     isWall={isWall}
                                     row={row}
                                     col={col}
-                                    // mouseIsPressed={mouseIsPressed}
                                     onMouseDown={handleMouseDown}
+                                    onMouseUp={handleMouseup}
+                                    onMouseEnter={handleMouseEnter}
+                                    mouseIsPressed={mouseIsPressed}
+
                                 > </Node>
                             );
                         })}
