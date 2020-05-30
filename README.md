@@ -7,7 +7,12 @@
         - try to get the click wall behaviour, node is empty first click make wall, second click remove the wall
         - behaviour of handlemousedown is good - wall return true when node is mark, and wall return false when no mark or unmark, (may 29) 
     - handleMouseUp:
-        - try to get behaviour as release it will responde something.
+        - try to get behaviour as release it will responde something.(may 29)
+    - handleMouseEnter
+        - when the mouse enter the grid notthing happen unless it has been press
+        - when the mouse is press it will mark all the node it travel over
+        
+    
 
 
   

@@ -64,7 +64,7 @@ function App(){
     function onMouseDown(row, col){
         console.log('start down app');
         grid[row][col] = createWall(grid, row, col);  
-        setmousePress(!mouseIsPressed);  
+        setmousePress(true);  
        // console.log('mousepressed app handleMouseDown true when press otherwise',mouseIsPressed );
         console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall);  
         console.log('end down app');
@@ -79,14 +79,19 @@ function App(){
        console.log('end up app');
        
    }
-//    function handleMouseEnter(){
-//        console.log(mouseIsPressed);
-//        console.log('mouse is press');
-
-//        if(mouseIsPressed)return;
-//       // grid[node.row][node.col] = createWall(grid, node.row, node.col);     
+   function handleMouseEnter(row,  col){
+       console.log('start app enter');
+       
+       console.log(mouseIsPressed);
+       
+       if(!mouseIsPressed)return false;
+       grid[row][col] = createWall(grid, row, col);    
+       console.log('mouse is press');
+       console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall); 
+       console.log('end app enter');
+       
    
-//    }
+   }
    return (<div className="grid"  >
              {grid.map((row, rowIdx)=> {
                  return (
@@ -109,7 +114,7 @@ function App(){
                                     col={col}
                                     onMouseDown={onMouseDown}
                                     onMouseUp={handleMouseup}
-                                    // onMouseEnter={handleMouseEnter}
+                                    onMouseEnter={handleMouseEnter}
                                     mouseIsPressed={mouseIsPressed}
                                      
 

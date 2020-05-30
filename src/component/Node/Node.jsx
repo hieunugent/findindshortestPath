@@ -17,6 +17,7 @@ function Node(node){
     const [extraClassName, setExtraClassName] = useState('node');
     const [isReadyWall, setwall ]= useState(false);
     const [newNode, setNode] = useState(node);
+    const [isMousePressed, setmousePress] = useState(false);
     // console.log('in node main handle down the wall', isWall);
     function handleClick(){
       console.log("click");
@@ -31,8 +32,8 @@ function Node(node){
         console.log("start down node");
         
         console.log("mouse is Down on" , row , col);
-       // console.log('in node handle down the wall', node.isWall, " of row", row, "col", col);
-     //set out put for each node when hit the wall
+         // console.log('in node handle down the wall', node.isWall, " of row", row, "col", col);
+        //set out put for each node when hit the wall
         setExtraClassName(() => !isReadyWall ? 'node node-wall' : 'node');
         setwall(!isReadyWall);
 
@@ -43,7 +44,7 @@ function Node(node){
         return  { ...preValue,
           isWall: !preValue.isWall};
         });
-
+      setmousePress(!isMousePressed);
         node = newNode;
         node.onMouseDown(row, col); 
         console.log('continue node down');
@@ -57,16 +58,22 @@ function Node(node){
         
     }
     function onMouseUp(){
+       setmousePress(!isMousePressed);
         node.onMouseUp();
         console.log('mouse release in node', row, col);
-        
     }
     
-    // function onMouseEnter(){
-    //   // setExtraClassName("node node-wall"); 
-    //   console.log('mouse enter in node', row , col);
-      
-    // }
+    function onMouseEnter(){
+          console.log("start node enter");
+          node.onMouseEnter(row, col);
+          console.log('mouse enter in node', row, col);
+          setExtraClassName('');
+    
+         // node.onMouseEnter(row, col);
+          console.log("press on process");     
+          console.log('end node enter');
+          
+    }
    
     return (
       <div
@@ -82,9 +89,9 @@ function Node(node){
         }
         onMouseDown={handleMouseDown}
         onMouseUp={onMouseUp}
-         
-          onClick={handleClick}
-           // onMouseEnter={onMouseEnter}
+        onClick={handleClick}
+        onMouseEnter={onMouseEnter}
+
       ></div>
     );
 }
