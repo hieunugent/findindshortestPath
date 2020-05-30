@@ -1,44 +1,90 @@
 import React, { useState } from "react";
 import "./Node.css";
-import { render } from "@testing-library/react";
+
+
 
 
 function Node(node){
+   
+    //const [newNode, setNode] = useState(node);
     const {
       row,
       col,
       isStart,
       isFinish,
       isWall,
-      onMouseDown,
-      onMouseEnter,
-      onMouseUp,
     } = node;
     const [extraClassName, setExtraClassName] = useState('node');
-   
+    const [isReadyWall, setwall ]= useState(false);
+    const [newNode, setNode] = useState(node);
+    // console.log('in node main handle down the wall', isWall);
+    function handleClick(){
+      console.log("click");
+    }
+      // function onMouseDown() {
+      //   node.onMouseDown(node.row, node.col);
+      //   // set out put for each node when hit the wall
+      //   setExtraClassName(() => !isReadyWall ? 'node node-wall' : 'node');
+      //   setwall(!isReadyWall);
+      // }
     function handleMouseDown(){
-        node.onMouseDown(node);   
-        setExtraClassName('node node-wall');      
+        console.log("start down node");
+        
+        console.log("mouse is Down on" , row , col);
+       // console.log('in node handle down the wall', node.isWall, " of row", row, "col", col);
+     //set out put for each node when hit the wall
+        setExtraClassName(() => !isReadyWall ? 'node node-wall' : 'node');
+        setwall(!isReadyWall);
+
+       
+        
+        
+        setNode((preValue)=>{ 
+        return  { ...preValue,
+          isWall: !preValue.isWall};
+        });
+
+        node = newNode;
+        node.onMouseDown(row, col); 
+        console.log('continue node down');
+
+    // end here
+        console.log(node);
+        // console.log(extraClassName);
+        // because the state of node is not update yet so to make consitency we reverse the iswall result
+        console.log('in node handle down the wall', !node.isWall ," of row", row, "col", col);  
+        console.log('end node down');
+        
     }
-    function handleMouseUp(){
+    function onMouseUp(){
         node.onMouseUp();
+        console.log('mouse release in node', row, col);
+        
     }
-    function handleMouseEnter(node){
-        setExtraClassName("node node-wall"); 
-    }
+    
+    // function onMouseEnter(){
+    //   // setExtraClassName("node node-wall"); 
+    //   console.log('mouse enter in node', row , col);
+      
+    // }
+   
     return (
       <div
-        id={"node"}
+
+        id={'node'}
         className={
           isStart
             ? "node node-start"
             : isFinish
             ? "node node-finish"
-            : extraClassName
+            : isWall
+            ? "node node-wall":extraClassName
         }
         onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseEnter={handleMouseEnter}
+        onMouseUp={onMouseUp}
+         
+          onClick={handleClick}
+           // onMouseEnter={onMouseEnter}
       ></div>
     );
 }

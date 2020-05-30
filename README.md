@@ -1,9 +1,14 @@
 # state problem and process the problem
 - todo list 
-    - make grid
+    - make grid( may 25)
     - make start point and end destinate
     - make the isWall respond on backend properly , when click on any node of grid it return the right behavior , but not display in the frontend yet (may 28)
-    - 
+    - handleMouseDown:
+        - try to get the click wall behaviour, node is empty first click make wall, second click remove the wall
+        - behaviour of handlemousedown is good - wall return true when node is mark, and wall return false when no mark or unmark, (may 29) 
+    - handleMouseUp:
+        - try to get behaviour as release it will responde something.
+
 
   
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

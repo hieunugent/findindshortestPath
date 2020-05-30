@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import Node from "./Node/Node";
 import "./grid/grid.css";
 
@@ -30,38 +30,63 @@ const createNode= (row, col) => {
 };
 
 const createWall=(grid, row, col)=> {
-    const asNode = grid[row][col];
+    const newGrid = grid.slice();
+    const asNode = newGrid[row][col];
     const newNode = {
       ...asNode,
-      isWall: !asNode.isWall,
+        isWall: !asNode.isWall,
+     
     };  
-    return newNode;
-}
+    newGrid[row][col] = newNode;
+    return newGrid[row][col];
  
-
+};
+ 
+// const removeWall = (grid, row, col) => {
+//     const newGrid = grid.slice();
+//     const asNode = newGrid[row][col];
+//     const newNode = {
+//         ...asNode,
+//         isWall: false,
+       
+//     };
+//     newGrid[row][col] = newNode;
+//     return newGrid[row][col];
+// }
 function App(){
+   console.log('start app');
    
    const grid = getInitialGrid();
    const [mouseIsPressed, setmousePress] = useState(false);
+   console.log("current mouse press in main  app", mouseIsPressed);
+   console.log("current mosue is release in main app", !mouseIsPressed);
    
-   function handleMouseDown(node){
-        grid[node.row][node.col] = createWall(grid, node.row, node.col);     
-        setmousePress(true);  
-   }
-   function handleMouseup(){
-       setmousePress(false);
-       console.log(mouseIsPressed);
-       
-   }
-   function handleMouseEnter(node){
-       console.log(mouseIsPressed);
-       
-        if (!mouseIsPressed){
-            return;
-        }
-            grid[node.row][node.col]= createWall(grid, node.row, node.col);
+    function onMouseDown(row, col){
+        console.log('start down app');
+        grid[row][col] = createWall(grid, row, col);  
+        setmousePress(!mouseIsPressed);  
+       // console.log('mousepressed app handleMouseDown true when press otherwise',mouseIsPressed );
+        console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall);  
+        console.log('end down app');
+        
 
    }
+   function handleMouseup(){
+       console.log('start up app');
+       
+       setmousePress(!mouseIsPressed);  
+       console.log('mouse is released', mouseIsPressed);   
+       console.log('end up app');
+       
+   }
+//    function handleMouseEnter(){
+//        console.log(mouseIsPressed);
+//        console.log('mouse is press');
+
+//        if(mouseIsPressed)return;
+//       // grid[node.row][node.col] = createWall(grid, node.row, node.col);     
+   
+//    }
    return (<div className="grid"  >
              {grid.map((row, rowIdx)=> {
                  return (
@@ -72,8 +97,7 @@ function App(){
                               col,
                               isFinish,
                               isStart,
-                              isWall,
-                              
+                              isWall,  
                             } = node;
                             return (
                                 <Node
@@ -83,14 +107,16 @@ function App(){
                                     isWall={isWall}
                                     row={row}
                                     col={col}
-                                    onMouseDown={handleMouseDown}
+                                    onMouseDown={onMouseDown}
                                     onMouseUp={handleMouseup}
-                                    onMouseEnter={handleMouseEnter}
+                                    // onMouseEnter={handleMouseEnter}
                                     mouseIsPressed={mouseIsPressed}
+                                     
 
                                 > </Node>
                             );
                         })}
+                        
                     </div>
                  );
              })}
