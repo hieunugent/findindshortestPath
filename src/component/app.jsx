@@ -56,39 +56,40 @@ const createWall=(grid, row, col)=> {
 function App(){
    console.log('start app');
    
-   const grid = getInitialGrid();
-   const [mouseIsPressed, setmousePress] = useState(false);
-   console.log("current mouse press in main  app", mouseIsPressed);
-   console.log("current mosue is release in main app", !mouseIsPressed);
+    const grid = getInitialGrid();
+    const [mouseispressed, setmousePress] = useState(false);
+    console.log("current mouse press in main  app", mouseispressed);
+    console.log("current mosue is release in main app", !mouseispressed);
    
     function onMouseDown(row, col){
-        console.log('start down app');
+      //  console.log('start down app');
         grid[row][col] = createWall(grid, row, col);  
         setmousePress(true);  
+        return grid[row][col];
        // console.log('mousepressed app handleMouseDown true when press otherwise',mouseIsPressed );
-        console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall);  
-        console.log('end down app');
+       // console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall);  
+       //console.log('end down app');
         
 
    }
    function handleMouseup(){
-       console.log('start up app');
-       
-       setmousePress(!mouseIsPressed);  
-       console.log('mouse is released', mouseIsPressed);   
-       console.log('end up app');
+      //console.log('start up app'); 
+       setmousePress(false);  
+      //console.log('mouse is released', mouseispressed);   
+      //console.log('end up app');
        
    }
    function handleMouseEnter(row,  col){
-       console.log('start app enter');
-       
-       console.log(mouseIsPressed);
-       
-       if(!mouseIsPressed)return false;
-       grid[row][col] = createWall(grid, row, col);    
-       console.log('mouse is press');
+       console.log('start app enter');  
+       if(!mouseispressed){
+           console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall);
+            return;
+       }
+       grid[row][col] = createWall(grid, row, col); 
+       console.log('mouse is app press', mouseispressed);
        console.log("main app wall need to be true when marked, otherwise false", grid[row][col].isWall); 
        console.log('end app enter');
+       return mouseispressed;
        
    
    }
@@ -112,12 +113,10 @@ function App(){
                                     isWall={isWall}
                                     row={row}
                                     col={col}
+                                    mouseispressed={mouseispressed}
                                     onMouseDown={onMouseDown}
                                     onMouseUp={handleMouseup}
                                     onMouseEnter={handleMouseEnter}
-                                    mouseIsPressed={mouseIsPressed}
-                                     
-
                                 > </Node>
                             );
                         })}
