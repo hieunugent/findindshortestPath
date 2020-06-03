@@ -11,6 +11,12 @@
     - handleMouseEnter
         - when the mouse enter the grid notthing happen unless it has been press
         - when the mouse is press it will mark all the node it travel over
+        - the handlMouseEnter is handled by call the function onMouseEnter in the Node, then it will process the function handleMouseEnter in main Grid  and return the ispress value
+        - it will take that value to draw the wall as each node
+        - but the remove wall of wall build by handle mouse enter need 2 click(may 31)
+        - solve double click remove (jun 1)
+    - build algorithm find best path
+        -
         
     
 

@@ -16,8 +16,10 @@ function Node(node){
     } = node;
     const [extraClassName, setExtraClassName] = useState('node');
     const [isReadyWall, setwall ]= useState(false);
-    const [newNode, setNode] = useState(node);
-    const [isMousePressed, setmousePress] = useState(false);
+    //const [newNode, setNode] = useState(node);
+    
+    
+   // const [isMousePressed, setmousePress] = useState(false);
     // console.log('in node main handle down the wall', isWall);
    
     // function handleClick(){
@@ -37,16 +39,15 @@ function Node(node){
         //set out put for each node when hit the wall
         setExtraClassName(() => !isReadyWall? 'node node-wall' : 'node');
         setwall(!isReadyWall);
-        setNode((preValue)=>{ 
-        return  { ...preValue,
-          isWall: !preValue.isWall};
-        });
-        setmousePress(true);
-        node = newNode;  
+        // setNode((preValue)=>{ 
+        // return  { ...preValue,
+        //   isWall: !preValue.isWall};
+        // });
+       // setmousePress(true);
+       // node = newNode;  
         node = node.onMouseDown(row, col);
         //console.log('continue node down');
-
-    // end here
+        // end here
         // console.log(node);
         // console.log(extraClassName);
         // because the state of node is not update yet so to make consitency we reverse the iswall result
@@ -55,23 +56,22 @@ function Node(node){
         
     }
     function onMouseUp(){
-      setmousePress(false);
+     // setmousePress(false);
       node.onMouseUp();   
-        //console.log('mouse release in node', row, col);
+     //console.log('mouse release in node', row, col);
     }
     
     function onMouseEnter(){
-          console.log("start node enter");
-          let updatenode=node.onMouseEnter(row, col);
-          // console.log('mouse enter in node', row, col);
+         // console.log("start node enter");
+           // console.log('mouse enter in node', row, col);
           // console.log('mouse is pressed',isMousePressed );
+         let updatenode=node.onMouseEnter(row, col);
          if (updatenode){
            setExtraClassName(!isReadyWall?'node node-wall':'node');
            setwall(!isReadyWall);
          }  
-        // 
-    
-         // node.onMouseEnter(row, col);
+          // console.log(node);
+           // node.onMouseEnter(row, col);
           // console.log("press on process");     
           // console.log('end node enter');      
     }
