@@ -15,6 +15,8 @@
         - it will take that value to draw the wall as each node
         - but the remove wall of wall build by handle mouse enter need 2 click(may 31)
         - solve double click remove (jun 1)
+    - build the start and finish for user can put anywhere
+        - 
     - build algorithm find best path
         -
         

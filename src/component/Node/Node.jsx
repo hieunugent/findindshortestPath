@@ -17,11 +17,8 @@ function Node(node){
     const [extraClassName, setExtraClassName] = useState('node');
     const [isReadyWall, setwall ]= useState(false);
     //const [newNode, setNode] = useState(node);
-    
-    
-   // const [isMousePressed, setmousePress] = useState(false);
+    // const [isMousePressed, setmousePress] = useState(false);
     // console.log('in node main handle down the wall', isWall);
-   
     // function handleClick(){
     //   console.log("click");
     // }
@@ -32,17 +29,16 @@ function Node(node){
       //   setwall(!isReadyWall);
       // }
     function handleMouseDown(){
-       // console.log("start down node");
-        
+       // console.log("start down node"); 
        // console.log("mouse is Down on" , row , col);
-         // console.log('in node handle down the wall', node.isWall, " of row", row, "col", col);
-        //set out put for each node when hit the wall
+       // console.log('in node handle down the wall', node.isWall, " of row", row, "col", col);
+       //set out put for each node when hit the wall
         setExtraClassName(() => !isReadyWall? 'node node-wall' : 'node');
         setwall(!isReadyWall);
-        // setNode((preValue)=>{ 
-        // return  { ...preValue,
-        //   isWall: !preValue.isWall};
-        // });
+       // setNode((preValue)=>{ 
+       // return  { ...preValue,
+       //   isWall: !preValue.isWall};
+       // });
        // setmousePress(true);
        // node = newNode;  
         node = node.onMouseDown(row, col);
