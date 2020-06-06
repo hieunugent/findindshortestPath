@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Node.css";
 
-
+import {KeyboardArrowRightIcon} from '@material-ui/icons/KeyboardArrowRight';
 
 
 function Node(node){
@@ -75,8 +75,7 @@ function Node(node){
    
     return (
       <div
-
-        id={'node'}
+        id={`node-${row}-${col}`}
         className={
           isStart
             ? "node node-start"

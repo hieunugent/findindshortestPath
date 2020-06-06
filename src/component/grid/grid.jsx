@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Node from "../Node/Node";
 import "./grid.css";
+import {dijkstraAlgorithms, getNodeInshortestPathOrder} from '../algorithms/dijkstra';
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -15,7 +16,7 @@ function Grid() {
     const [FinishingNodePressded,setFinishPress] = useState(false);
     // console.log("current mouse press in main  app", mouseispressed);
     // console.log("current mosue is release in main app", !mouseispressed);
-
+    
     function onMouseDown(row, col) {
         //  console.log('start down app');
         createWall(grid, row, col);
@@ -46,8 +47,58 @@ function Grid() {
         // console.log('end app enter');
         return mouseispressed;
     }
+    function animationshortestPath(nodesInshortestpathOrder){
+        for (let i = 0 ; i < nodesInshortestpathOrder.length; i++){
+            setTimeout(()=> {
+                const node = nodesInshortestpathOrder[i];
+
+                if (node.row === START_NODE_ROW && node.col === START_NODE_COL) {
+                    document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-start';
+
+                }
+                else if (node.row === FINISH_NODE_ROW && node.col === FINISH_NODE_COL) {
+                    document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-finish';
+                }
+                else {
+                document.getElementById(`node-${node.row}-${node.col}`).className='node node-shortest-path';}
+
+            }, 50*i);
+        }
+
+    }
+    function animationFindingPath(visitedNodesInorder, nodesInshortestpathOrder ){
+        for (let i = 0 ; i <= visitedNodesInorder.length; i++){
+            if (i === visitedNodesInorder.length){
+                setTimeout(()=> {
+                    animationshortestPath(nodesInshortestpathOrder);
+                }, 10* i);
+                return;
+            }
+
+            setTimeout(()=>{
+                const node = visitedNodesInorder[i];
+                if (node.row === START_NODE_ROW && node.col === START_NODE_COL) {
+                    document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-start';
+                  
+                }
+                else if (node.row === FINISH_NODE_ROW && node.col === FINISH_NODE_COL) {
+                    document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-finish';
+                }
+                else{
+
+                
+                document.getElementById(`node-${node.row}-${node.col}`).className ='node node-visited';}
+            }, 10*i);
+        }
+    }
     function handleDijkstra(){
         console.log("Call algorithm");
+       
+        const startNode = grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        const visitedNodesInorder = dijkstraAlgorithms(grid, startNode, finishNode);
+        const nodesInshortestpathOrder = getNodeInshortestPathOrder(finishNode);
+        animationFindingPath(visitedNodesInorder, nodesInshortestpathOrder);
         
     }
     function handleSetStart(){
@@ -64,18 +115,30 @@ function Grid() {
     }
     function handleClearWall(grid){
         console.log("clear wall");
-        for (let row = 0; row < 20; row++) {
-            for (let col = 0; col < 50; col++) {
-              clearWall(grid, row, col);
+        setTimeout(() => {
+            for (let row = 0; row < 20; row++) {
+                for (let col = 0; col < 50; col++) {
+                    if (row === START_NODE_ROW && col === START_NODE_COL){
+                        document.getElementById(`node-${row}-${col}`).className = 'node node-start';
+                        continue;
+                    }
+                    if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){ 
+                        document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
+                        
+                        continue;}
+
+                     document.getElementById(`node-${row}-${col}`).className = 'node';
+                }
             }
-        }
+        });
+       
         
     }
     return (
     <>
            <div  className="navigationTab">
                 <button onClick={handleDijkstra}> Dijkstra's Algorithm</button>
-                <button onClick={handleSetStart}> Start Destination</button>
+                <button onClick={handleSetStart}>  Start Destination</button>
                 <button onClick={handleSetFinish}> End Destination</button>
                 <button onClick={handleClearWall}> Clear all wall</button>
            </div> 
@@ -159,18 +222,6 @@ const createWall = (grid, row, col) => {
     grid[row][col] = newNode;
 
 };
-const clearWall = (grid, row, col) => {
-    // const newGrid = grid.slice();
-    const asNode = grid[row][col];
-    const newNode = {
-        ...asNode,
-        isclear: !asNode.isclear,
 
-    };
-    // // newGrid[row][col] = newNode;
-    // return newGrid[row][col];
-    grid[row][col] = newNode;
-
-};
 const grid = getInitialGrid();
 export default Grid ;
