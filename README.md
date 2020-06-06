@@ -18,6 +18,9 @@
     - build the start and finish for user can put anywhere
         - behaviour need; when click on the start/finish button, and move the mouse to the grid and click on any node of grid 
         - it will mark as node start/finish  
+    - build the clearwall function 
+        - animation is clear, 
+        - but the value of it does not clear yet
     - build algorithm find best path
         - let the initial node is start node
         - let distance of node Y is distance from the initial node to Y
