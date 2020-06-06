@@ -30,7 +30,7 @@
                 - compare the newly calculated tentative distance to the current assigned  value and assign the smaller one
              4. when we are done with all unvisited neighbours of current node mark the current node as visited  adn remove it from the unvisited set, a visited node will never be checked again.
              5. if the destination node has been marked visited or if the smallest tentative distance amonng the nodes in the unvisited set is infinity then stop, the algorithm has finished
-             6. Otherwise, select the unvisited node that marked with the smallest tentaive distancem set it as the new "current node", and go back to step 3
+             6. Otherwise, select the unvisited node that marked with the smallest tentaive distancem set it as the new "current node", and go back to step c.
 
             
             
