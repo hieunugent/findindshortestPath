@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Node.css";
 
-import {KeyboardArrowRightIcon} from '@material-ui/icons/KeyboardArrowRight';
+
 
 
 function Node(node){
