@@ -62,12 +62,22 @@ function Grid() {
         console.log("finishing node is set");
         
     }
+    function handleClearWall(grid){
+        console.log("clear wall");
+        for (let row = 0; row < 20; row++) {
+            for (let col = 0; col < 50; col++) {
+              clearWall(grid, row, col);
+            }
+        }
+        
+    }
     return (
     <>
            <div  className="navigationTab">
                 <button onClick={handleDijkstra}> Dijkstra's Algorithm</button>
                 <button onClick={handleSetStart}> Start Destination</button>
                 <button onClick={handleSetFinish}> End Destination</button>
+                <button onClick={handleClearWall}> Clear all wall</button>
            </div> 
     
     
@@ -103,6 +113,8 @@ function Grid() {
             );
         })}
 
+
+
     </div></>
     )
 }
@@ -130,6 +142,7 @@ const createNode = (row, col) => {
         distance: Infinity,
         isVisited: false,
         previousNode: null,
+        isclear:false,
     };
 };
 
@@ -139,6 +152,19 @@ const createWall = (grid, row, col) => {
     const newNode = {
         ...asNode,
         isWall: !(asNode.isWall),
+
+    };
+    // // newGrid[row][col] = newNode;
+    // return newGrid[row][col];
+    grid[row][col] = newNode;
+
+};
+const clearWall = (grid, row, col) => {
+    // const newGrid = grid.slice();
+    const asNode = grid[row][col];
+    const newNode = {
+        ...asNode,
+        isclear: !asNode.isclear,
 
     };
     // // newGrid[row][col] = newNode;

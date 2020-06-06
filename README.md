@@ -16,9 +16,26 @@
         - but the remove wall of wall build by handle mouse enter need 2 click(may 31)
         - solve double click remove (jun 1)
     - build the start and finish for user can put anywhere
-        - 
+        - behaviour need; when click on the start/finish button, and move the mouse to the grid and click on any node of grid 
+        - it will mark as node start/finish  
     - build algorithm find best path
-        -
+        - let the initial node is start node
+        - let distance of node Y is distance from the initial node to Y
+             1. mark all node unvisited, create a set of all the unvisited nodes called the unvisited set 
+             2.  Assign to every node a tentative distance  value: 
+                - set it to zero for our initial node 
+                - to infinity for all other nodes, 
+                - set initial node as current
+             3. for the current node , consider all of its unvisted  neighbour and calculate their tentative  distances through the current node, 
+                - compare the newly calculated tentative distance to the current assigned  value and assign the smaller one
+             4. when we are done with all unvisited neighbours of current node mark the current node as visited  adn remove it from the unvisited set, a visited node will never be checked again.
+             5. if the destination node has been marked visited or if the smallest tentative distance amonng the nodes in the unvisited set is infinity then stop, the algorithm has finished
+             6. Otherwise, select the unvisited node that marked with the smallest tentaive distancem set it as the new "current node", and go back to step 3
+
+            
+            
+            
+
         
     
 

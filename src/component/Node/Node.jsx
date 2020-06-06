@@ -13,6 +13,7 @@ function Node(node){
       isStart,
       isFinish,
       isWall,
+    //  isclear,
     } = node;
     const [extraClassName, setExtraClassName] = useState('node');
     const [isReadyWall, setwall ]= useState(false);
@@ -82,7 +83,10 @@ function Node(node){
             : isFinish
             ? "node node-finish"
             : isWall
-            ? "node node-wall":extraClassName
+            ? "node node-wall"
+            // : isclear
+            // ? "node"
+            :extraClassName
         }
         onMouseDown={handleMouseDown}
         onMouseUp={onMouseUp}
