@@ -85,8 +85,6 @@ function Grid() {
                     document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-finish';
                 }
                 else{
-
-                
                 document.getElementById(`node-${node.row}-${node.col}`).className ='node node-visited';}
             }, 10*i);
         }
