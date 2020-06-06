@@ -136,8 +136,8 @@ function Grid() {
     <>
            <div  className="navigationTab">
                 <button onClick={handleDijkstra}> Dijkstra's Algorithm</button>
-                <button onClick={handleSetStart}>  Start Destination</button>
-                <button onClick={handleSetFinish}> End Destination</button>
+                {/* <button onClick={handleSetStart}>  Start Destination</button> */}
+                {/* <button onClick={handleSetFinish}> End Destination</button> */}
                 <button onClick={handleClearWall}> Clear all wall</button>
            </div> 
     
@@ -169,13 +169,9 @@ function Grid() {
                             > </Node>
                         );
                     })}
-
                 </div>
             );
         })}
-
-
-
     </div></>
     )
 }
