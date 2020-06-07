@@ -34,6 +34,19 @@
              4. when we are done with all unvisited neighbours of current node mark the current node as visited  adn remove it from the unvisited set, a visited node will never be checked again.
              5. if the destination node has been marked visited or if the smallest tentative distance amonng the nodes in the unvisited set is infinity then stop, the algorithm has finished
              6. Otherwise, select the unvisited node that marked with the smallest tentaive distancem set it as the new "current node", and go back to step 3
+    - build a randome maze generrator:
+        - Suggestion used a randomized version of Kruskal's algorithm.(wikipedia)
+            1. create a list of all walls, and create a set for each cell, each containing just that one cell
+            2. for each wall, in some random order:
+                1. if the cells divided by this wall belong to distinct sets:
+                    1. remove the current Wall
+                    2. Join the sets of the formerly divided cells
+        - suggestion recursive division
+            1. begin with an empty maze
+            2. divide the field with a wall either horizontally or vertically. add a single passage through the wall
+            3. repeat step #2  with the areas on either side of the wall
+            4. continue, recursively, until the maze reaches the desired resolution 
+            
              
             
             
@@ -111,3 +124,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+the idea of this project is inherited from pathfiding visualizer of Clement Mihaiescu.

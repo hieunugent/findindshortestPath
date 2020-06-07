@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Node from "../Node/Node";
 import "./grid.css";
 import {dijkstraAlgorithms, getNodeInshortestPathOrder} from '../algorithms/dijkstra';
+import Button from '@material-ui/core/Button';
+
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -14,37 +16,24 @@ function Grid() {
     const [mouseispressed, setmousePress] = useState(false);
     const [startNodePressded, setStartpress] = useState(false);
     const [FinishingNodePressded,setFinishPress] = useState(false);
-    // console.log("current mouse press in main  app", mouseispressed);
-    // console.log("current mosue is release in main app", !mouseispressed);
-    
+   
     function onMouseDown(row, col) {
-        //  console.log('start down app');
         createWall(grid, row, col);
         setmousePress(true);
-        //console.log("main app wall need to be true when marked, otherwise false", row, col, grid[row][col].isWall);  
         return grid[row][col];
-        // console.log('mousepressed app handleMouseDown true when press otherwise',mouseIsPressed );
-        // console.log('end down app');
         
     }
     function handleMouseup() {
-        //console.log('start up app'); 
         setmousePress(false);
-        //console.log('mouse is released', mouseispressed);   
-        //console.log('end up app');
 
     }
     function handleMouseEnter(row, col) {
-        //console.log('start app enter');
         if (!mouseispressed) {
-           // console.log("main app wall need to be true when marked, otherwise false",row, col , grid[row][col].isWall);
-           // console.log(grid[row][col]);
+          console.log(grid[row][col]);
             return;
         }
          createWall(grid, row, col);
-        // console.log('mouse is app press', mouseispressed);
-       // console.log("main app wall need to be true when marked, otherwise false", row, col , grid[row][col].isWall);
-        // console.log('end app enter');
+        
         return mouseispressed;
     }
     function animationshortestPath(nodesInshortestpathOrder){
@@ -61,7 +50,7 @@ function Grid() {
                 }
                 else {
                 document.getElementById(`node-${node.row}-${node.col}`).className='node node-shortest-path';}
-
+                
             }, 50*i);
         }
 
@@ -85,7 +74,7 @@ function Grid() {
                     document.getElementById(`node-${node.row}-${node.col}`).className = 'node node-finish';
                 }
                 else{
-                document.getElementById(`node-${node.row}-${node.col}`).className ='node node-visited';}
+                    document.getElementById(`node-${node.row}-${node.col}`).className ='node node-visited';}
             }, 10*i);
         }
     }
@@ -99,19 +88,36 @@ function Grid() {
         animationFindingPath(visitedNodesInorder, nodesInshortestpathOrder);
         
     }
-    function handleSetStart(){
+    function handleMakeWall(){
         console.log("wait for setting starting node");
         setStartpress(true);
         console.log("starting node is set");
         
     }
-    function handleSetFinish(){
-        console.log("waiting for setting finish node");
-        setFinishPress(true);
-        console.log("finishing node is set");
+    function handleClearfindingPath(){
+        console.log("waiting for setting clear finding path node");
+        
+         for (let row = 0 ; row < 20 ; row++){
+             for (let col = 0 ; col < 50; col ++){
+                if (row === START_NODE_ROW && col === START_NODE_COL){
+                    document.getElementById(`node-${row}-${col}`).className = 'node node-start';
+                    continue;
+                }
+                if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){ 
+                    document.getElementById(`node-${row}-${col}`).className = 'node node-finish'; 
+                    continue;
+                }
+                if (grid[row][col].isWall){
+                    continue;
+                }
+                document.getElementById(`node-${row}-${col}`).className = 'node';
+
+             }
+         }
+        console.log("finishing clear finding path ");
         
     }
-    function handleClearWall(grid){
+    function handleReset(grid){
         console.log("clear wall");
         setTimeout(() => {
             for (let row = 0; row < 20; row++) {
@@ -121,31 +127,32 @@ function Grid() {
                         continue;
                     }
                     if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){ 
-                        document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
-                        
-                        continue;}
-
+                        document.getElementById(`node-${row}-${col}`).className = 'node node-finish'; 
+                        continue;
+                    }
                      document.getElementById(`node-${row}-${col}`).className = 'node';
+                    
                 }
             }
         });
-       
-        
+        window.location.reload();
     }
     return (
     <>
            <div  className="navigationTab">
-                <button onClick={handleDijkstra}> Dijkstra's Algorithm</button>
+                <button  className="navButton" onClick={handleDijkstra}> Dijkstra's Algorithm</button>
                 {/* <button onClick={handleSetStart}>  Start Destination</button> */}
-                {/* <button onClick={handleSetFinish}> End Destination</button> */}
-                <button onClick={handleClearWall}> Clear all wall</button>
+                <button  className="navButton" onClick={handleMakeWall}>Random Maze Generator </button>
+                <button className="navButton" onClick={handleClearfindingPath} > clear finding path</button>
+                <button  className="navButton" onClick={handleReset}> Reset</button>
+
            </div> 
     
     
     <div className="grid"  >
         {grid.map((row, rowIdx) => {
             return (
-                <div key={rowIdx}>
+                <div key={rowIdx} className="rowgrid">
                     {row.map((node, nodeIdx) => {
                         const {
                             row,
@@ -216,6 +223,19 @@ const createWall = (grid, row, col) => {
     grid[row][col] = newNode;
 
 };
+const clearWall = (grid, row, col) => {
+    // const newGrid = grid.slice();
+    const asNode = grid[row][col];
+    const newNode = {
+        ...asNode,
+        isWall: false,
 
-const grid = getInitialGrid();
+    };
+    // // newGrid[row][col] = newNode;
+    // return newGrid[row][col];
+    grid[row][col] = newNode;
+
+};
+
+let grid = getInitialGrid();
 export default Grid ;

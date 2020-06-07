@@ -7,3 +7,19 @@
     margin: 0px 100px;
     
 }
+
+.navButton{
+  background-color: lightblue;
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  margin: 0px 20px;
+  transition-duration: 0.3s;
+  border-radius: 8px;
+
+}
+.navButton:hover{
+    background-color: lightseagreen;
+    color:white;
+}
