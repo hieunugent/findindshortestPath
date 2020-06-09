@@ -46,7 +46,7 @@
             2. divide the field with a wall either horizontally or vertically. add a single passage through the wall
             3. repeat step #2  with the areas on either side of the wall
             4. continue, recursively, until the maze reaches the desired resolution 
-            
+        - maze is on process but it is only haft of grid, 
              
             
             
