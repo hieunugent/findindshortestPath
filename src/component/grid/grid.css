@@ -1,14 +1,19 @@
 .grid{
-    margin: 100px 100px;
+    margin: 50px 100px;
     width: 200%;
+    resize: both;
+    
+}
+.rowgrid{
+    margin:-3px ;
+    resize: horizontal;
     
 }
 .navigationTab{
     margin: 0px 100px;
-    
 }
-
 .navButton{
+  
   background-color: lightblue;
   padding: 6px 16px;
   font-size: 0.875rem;

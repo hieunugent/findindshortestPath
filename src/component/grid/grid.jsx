@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Node from "../Node/Node";
 import "./grid.css";
 import {dijkstraAlgorithms, getNodeInshortestPathOrder} from '../algorithms/dijkstra';
-import Button from '@material-ui/core/Button';
+import { generate } from "../mazes/mazeGenerator";
 
 
 const START_NODE_ROW = 10;
@@ -14,8 +14,8 @@ const FINISH_NODE_COL = 35;
 function Grid() {
     console.log('start Grid Function');
     const [mouseispressed, setmousePress] = useState(false);
-    const [startNodePressded, setStartpress] = useState(false);
-    const [FinishingNodePressded,setFinishPress] = useState(false);
+   
+    
    
     function onMouseDown(row, col) {
         createWall(grid, row, col);
@@ -90,8 +90,24 @@ function Grid() {
     }
     function handleMakeWall(){
         console.log("wait for setting starting node");
-        setStartpress(true);
-        console.log("starting node is set");
+        generate(grid);
+        for (let row = 0 ; row < 20 ; row++){
+            for (let col = 0 ; col < 50; col++){
+                
+                if (grid[row][col].isWall) {
+                    setTimeout(() => { document.getElementById(
+                                         `node-${row}-${col}`
+                                       ).className = "node node-wall";
+
+                    }, col * 10);
+
+
+                    
+                }
+            }
+        }
+        
+    
         
     }
     function handleClearfindingPath(){
