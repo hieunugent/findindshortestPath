@@ -99,7 +99,7 @@ function Grid() {
                                          `node-${row}-${col}`
                                        ).className = "node node-wall";
 
-                    }, 20*col);
+                    }, 50*col);
 
 
                     

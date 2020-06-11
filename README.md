@@ -4,6 +4,7 @@
     - make start point and end destinate
     - make the isWall respond on backend properly , when click on any node of grid it return the right behavior , but not display in the frontend yet (may 28)
     - handleMouseDown:
+
         - try to get the click wall behaviour, node is empty first click make wall, second click remove the wall
         - behaviour of handlemousedown is good - wall return true when node is mark, and wall return false when no mark or unmark, (may 29) 
     - handleMouseUp:
@@ -46,7 +47,9 @@
             2. divide the field with a wall either horizontally or vertically. add a single passage through the wall
             3. repeat step #2  with the areas on either side of the wall
             4. continue, recursively, until the maze reaches the desired resolution 
-        - maze is on process but it is only haft of grid, 
+        - maze create but only haft(jun 8)
+        - maze create fall grid but does not have way out(jun 9)
+
              
             
             
