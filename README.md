@@ -1,6 +1,6 @@
 # state problem and process the problem
 - the app in process you can see it at
-    https://my-app-atest.herokuapp.com/
+    [Link to my app] https://my-finding-app.herokuapp.com/
 - todo list 
     - make grid( may 25)
     - make start point and end destinate
