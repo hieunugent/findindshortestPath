@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import "./Node.css";
-
-
-
-
 function Node(node){
    
     //const [newNode, setNode] = useState(node);
